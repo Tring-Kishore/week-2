@@ -17,5 +17,8 @@ public class Trycatch {
         {
             System.out.println("You are Not Eligible to Vote.");
         }
+        finally{
+            System.out.println("The Program has ended.");
+        }
     }   
 }
