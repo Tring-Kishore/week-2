@@ -20,5 +20,13 @@ public class Arrays{
         {
             System.out.print(arr[i]+" ");
         }
+
+        //Reverse Traversing
+
+        System.out.println("Reverse Traversing");
+        for(int i=n-1;i>=0;i--)
+        {
+            System.out.print(arr[i]+" ");
+        }
     }
 }
