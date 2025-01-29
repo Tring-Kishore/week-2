@@ -44,6 +44,12 @@ public class Linkedlist {
         PrintLinkedList(head4);
         System.out.println();
         searchingLL(5, head4);
+        System.out.print("\nDeleting Node At First\n");
+        Node head5 = deleteFirst(head4);
+        PrintLinkedList(head5);
+        System.out.println("\nDeleting At Last :");
+        Node head6 = deleteLast(head5);
+        PrintLinkedList(head6);
     }
     // Linked List Creation
     public static Node constructLL(int[] arr)
@@ -158,4 +164,28 @@ public class Linkedlist {
         }
         System.out.println("Element Not Found");
     }
+    public static Node deleteFirst(Node head)
+    {
+        if(head == null)
+        {
+            return null;
+        }
+        head = head.next;
+        return head;
+    }
+    public static Node deleteLast(Node head)
+    {
+        if(head == null)
+        {
+            return null;
+        }
+        Node mover = head;
+        while(mover.next.next != null)
+        {
+            mover = mover.next;
+        }
+        mover.next = null;
+        return head;
+    }
+
 }
