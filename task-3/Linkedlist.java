@@ -31,8 +31,14 @@ public class Linkedlist {
             System.out.print("Enter the Number : ");
             arr[i] = s.nextInt();
         }
-        Node head = constructLL(arr);
-        PrintLinkedList(head);
+        Node head1 = constructLL(arr);
+        PrintLinkedList(head1);
+        System.out.println("\nAfter Insert at First");
+        Node head2 = insertNodeFirst(9, head1);
+        PrintLinkedList(head2);
+        System.out.println("\nAfter Insert at Last");
+        Node head3 = insertNodeLast(0, head2);
+        PrintLinkedList(head3);
     }
     // Linked List Creation
     public static Node constructLL(int[] arr)
@@ -65,5 +71,30 @@ public class Linkedlist {
             System.out.print(mover.data+" ");
             mover = mover.next;
         }
+    }
+    public static Node insertNodeFirst(int element,Node head)
+    {
+        if(head==null)
+        {
+            return new Node(element);
+        }
+        Node newnode = new Node(element);
+        newnode.next = head;
+        return newnode;
+    }
+    public static Node insertNodeLast(int element,Node head)
+    {
+        if(head == null)
+        {
+            return new Node(element);
+        }
+        Node newnode = new Node(element);
+        Node mover = head;
+        while(mover.next != null)
+        {
+            mover = mover.next;
+        }
+        mover.next = newnode;
+        return head;
     }
 }
