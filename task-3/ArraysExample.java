@@ -39,5 +39,28 @@ public class ArraysExample {
 
         int Elements = Arrays.binarySearch(arr, 3);
         System.out.print("The index of the element is :"+Elements);
+
+        // Manual Sorting
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(arr[j] < arr[i])
+                {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+
+        System.out.println("After Sorting :");
+        for(int i=0;i<n;i++)
+        {
+            System.out.print(arr[i]+" ");
+        }
+
+
     }
 }
