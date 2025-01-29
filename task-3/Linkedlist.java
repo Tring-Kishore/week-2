@@ -50,6 +50,9 @@ public class Linkedlist {
         System.out.println("\nDeleting At Last :");
         Node head6 = deleteLast(head5);
         PrintLinkedList(head6);
+        System.out.println("\nDeleting Element\n");
+        Node head7 = deleteElement(6, head6);
+        PrintLinkedList(head7);
     }
     // Linked List Creation
     public static Node constructLL(int[] arr)
@@ -185,6 +188,30 @@ public class Linkedlist {
             mover = mover.next;
         }
         mover.next = null;
+        return head;
+    }
+    public static Node deleteElement(int element,Node head)
+    {
+        if(head == null)
+        {
+            return null;
+        }
+        Node prev = null;
+        Node mover = head;
+        if(mover.data == element)
+        {
+            Node newnode = deleteFirst(head);
+            return newnode;
+        }
+        while(mover != null)
+        {
+            if(mover.data == element)
+            {
+                prev.next = mover.next;
+            }
+            prev = mover;
+            mover = mover.next;
+        }
         return head;
     }
 
