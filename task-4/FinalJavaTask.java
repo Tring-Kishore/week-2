@@ -58,8 +58,8 @@ class Bank {
 }
 
 public class FinalJavaTask {
-    private static final ArrayList<Bank> accounts = new ArrayList<>();
-    private static final Scanner s = new Scanner(System.in);
+    static ArrayList<Bank> accounts = new ArrayList<>();
+    static Scanner s = new Scanner(System.in);
     public static void main(String[] args) 
     {
         System.out.println("Welcome to the Bank!");
