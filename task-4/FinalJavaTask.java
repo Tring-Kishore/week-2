@@ -100,7 +100,16 @@ public class FinalJavaTask {
             else if (choice == 2) 
             {
                 System.out.print("Enter your Account Number:");
-                String accNum = s.next();
+                String accNum;
+                while (true) 
+                {
+                    accNum = s.nextLine();
+                    if (accNum.length() == 15)
+                    {
+                        break;
+                    }    
+                    System.out.println("Please enter a 15 digit Account Number:");
+                }
                 Bank user = getAccount(accNum);
                 if (user != null) 
                 {
