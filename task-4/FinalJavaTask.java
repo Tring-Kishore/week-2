@@ -72,22 +72,22 @@ public class FinalJavaTask {
             System.out.println("\n1 - Create Account");
             System.out.println("2 - Login to Existing Account");
             System.out.println("3 - Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice:");
             int choice = s.nextInt();
             s.nextLine();
             if (choice == 1) 
             {
                 Bank newUser = new Bank();
-                System.out.print("Enter a 15-digit Account Number: ");
+                System.out.print("Enter a 15 digit Account Number:");
                 String accountNum;
                 while (true) 
                 {
                     accountNum = s.nextLine();
                     if (accountNum.length() == 15) break;
-                    System.out.println("Invalid input! Please enter a 15-digit Account Number:");
+                    System.out.println("Please enter a 15 digit Account Number:");
                 }
                 newUser.setAccountNum(accountNum);
-                System.out.print("Enter the initial balance: ");
+                System.out.print("Enter the initial balance:");
                 int balance = s.nextInt();
                 newUser.setBalance(balance);
                 accounts.add(newUser);
@@ -96,7 +96,7 @@ public class FinalJavaTask {
             } 
             else if (choice == 2) 
             {
-                System.out.print("Enter your Account Number: ");
+                System.out.print("Enter your Account Number:");
                 String accNum = s.next();
                 Bank user = getAccount(accNum);
                 if (user != null) 
@@ -109,7 +109,7 @@ public class FinalJavaTask {
             } 
             else if (choice == 3) 
             {
-                System.out.println("Thank you for using the Bank!");
+                System.out.println("Thank you!!");
                 System.exit(0);
             } 
             else 
@@ -146,7 +146,7 @@ public class FinalJavaTask {
                     System.out.println("Your current balance is: " + user.getBalance());
                     break;
                 case 4:
-                    System.out.print("Enter recipient's Account Number: ");
+                    System.out.print("Enter recipient's Account Number:");
                     s.nextLine();
                     String recipientAcc = s.nextLine();
                     Bank recipient = getAccount(recipientAcc);
@@ -156,7 +156,7 @@ public class FinalJavaTask {
                     } 
                     else 
                     {
-                        System.out.print("Enter amount to transfer: ");
+                        System.out.print("Enter amount to transfer:");
                         int transferAmount = s.nextInt();
                         user.transferAmount(transferAmount, recipient);
                     }
