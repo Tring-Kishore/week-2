@@ -27,7 +27,7 @@ class Bank {
         } else 
         {
             balance -= amount;
-            System.out.println("The new balance is : " + balance);
+            //System.out.println("The new balance is : " + balance);
         }
     }
     public void deposit(int amount) 
@@ -39,7 +39,7 @@ class Bank {
         else 
         {
             balance += amount;
-            System.out.println("The new balance is : " + balance);
+            //System.out.println("The new balance is : " + balance);
         }
     }
     public void transferAmount(int amount, Bank recipient) 
@@ -83,7 +83,10 @@ public class FinalJavaTask {
                 while (true) 
                 {
                     accountNum = s.nextLine();
-                    if (accountNum.length() == 15) break;
+                    if (accountNum.length() == 15)
+                    {
+                        break;
+                    }    
                     System.out.println("Please enter a 15 digit Account Number:");
                 }
                 newUser.setAccountNum(accountNum);
