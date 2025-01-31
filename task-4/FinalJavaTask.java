@@ -83,11 +83,21 @@ public class FinalJavaTask {
                 while (true) 
                 {
                     accountNum = s.nextLine();
-                    if (accountNum.length() == 15)
+                    boolean b = validateAccNum(accountNum);
+                    if(b && accountNum.length() == 15)
                     {
                         break;
-                    }    
-                    System.out.println("Please enter a 15 digit Account Number:");
+                    }
+                    else if(!b)
+                    {
+                        System.out.println("The Account number should not have Alphabets.");
+                    }
+                    if(accountNum.length() == 15)
+                    {
+                        break;
+                    }
+                    else
+                        System.out.println("Please enter a 15 digit Account Number:");
                 }
                 newUser.setAccountNum(accountNum);
                 System.out.print("Enter the initial balance:");
@@ -104,11 +114,21 @@ public class FinalJavaTask {
                 while (true) 
                 {
                     accNum = s.nextLine();
-                    if (accNum.length() == 15)
+                    boolean b = validateAccNum(accNum);
+                    if(b && accNum.length() == 15)
                     {
                         break;
-                    }    
-                    System.out.println("Please enter a 15 digit Account Number:");
+                    }
+                    else if(!b)
+                    {
+                        System.out.println("The Account number should not have Alphabets.");
+                    }
+                    if(accNum.length() == 15)
+                    {
+                        break;
+                    }
+                    else
+                        System.out.println("Please enter a 15 digit Account Number:");
                 }
                 Bank user = getAccount(accNum);
                 if (user != null) 
@@ -129,6 +149,18 @@ public class FinalJavaTask {
                 System.out.println("Invalid choice, please try again.");
             }
         }
+    }
+    public static boolean validateAccNum(String acc)
+    {
+        char[] ch = acc.toCharArray();
+        for(int i=0;i<ch.length;i++)
+        {
+            if(ch[i] >= 'a' && ch[i] <= 'z' || ch[i] >= 'A' && ch[i] <= 'Z')
+            {
+                return false;
+            }
+        }
+        return true;
     }
     public static void performActions(Bank user) 
     {
@@ -158,9 +190,28 @@ public class FinalJavaTask {
                     System.out.println("Your current balance is: " + user.getBalance());
                     break;
                 case 4:
-                    System.out.print("Enter recipient's Account Number:");
-                    s.nextLine();
-                    String recipientAcc = s.nextLine();
+                    System.out.print("Enter recipient's Account Number ");
+                    //s.nextLine();
+                    String recipientAcc;
+                    while (true) 
+                    {
+                        recipientAcc = s.nextLine();
+                        boolean b = validateAccNum(recipientAcc);
+                        if(b && recipientAcc.length() == 15)
+                        {
+                            break;
+                        }
+                        else if(!b)
+                        {
+                            System.out.println("The Account number should not have Alphabets.");
+                        }
+                        if(recipientAcc.length() == 15)
+                        {
+                            break;
+                        }
+                        else
+                            System.out.println("Please enter a 15 digit Account Number:");
+                    }
                     Bank recipient = getAccount(recipientAcc);
                     if(recipient == null)
                     {
