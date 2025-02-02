@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 class Bank {
     private String accountNum;
@@ -63,91 +64,63 @@ public class FinalJavaTask {
     public static void main(String[] args) 
     {
         System.out.println("Welcome to the Bank!");
-        createAccount();
+        initialProcess();
     }
-    public static void createAccount() 
+    public static void initialProcess() 
     {
         while (true) 
         {
-            System.out.println("\n1 - Create Account");
-            System.out.println("2 - Login to Existing Account");
-            System.out.println("3 - Exit");
-            System.out.print("Enter your choice:");
-            int choice = s.nextInt();
-            s.nextLine();
-            if (choice == 1) 
-            {
-                Bank newUser = new Bank();
-                System.out.print("Enter a 15 digit Account Number:");
-                String accountNum;
-                while (true) 
-                {
-                    accountNum = s.nextLine();
-                    boolean b = validateAccNum(accountNum);
-                    if(b && accountNum.length() == 15)
-                    {
+            try{
+                System.out.println("\n1 - Create Account");
+                System.out.println("2 - Login to Existing Account");
+                System.out.println("3 - Exit");
+                System.out.print("Enter your choice:");
+                int choice = s.nextInt();
+                s.nextLine();
+                switch (choice) {
+                    case 1:
+                        createAccount();
                         break;
-                    }
-                    else if(!b)
-                    {
-                        System.out.println("The Account number should not have Alphabets.");
-                    }
-                    if(accountNum.length() == 15)
-                    {
+                    case 2:
+                        loginToAccount();
                         break;
-                    }
-                    else
-                        System.out.println("Please enter a 15 digit Account Number:");
+                    case 3:
+                        System.out.println("Thank you!!");
+                        System.exit(0);    
+                    default:
+                        System.out.println("Invalid input , Enter the valid Input.");
                 }
-                newUser.setAccountNum(accountNum);
-                System.out.print("Enter the initial balance:");
-                int balance = s.nextInt();
-                newUser.setBalance(balance);
-                accounts.add(newUser);
-                System.out.println("Account Created Successfully!");
-
-            } 
-            else if (choice == 2) 
-            {
-                System.out.print("Enter your Account Number:");
-                String accNum;
-                while (true) 
-                {
-                    accNum = s.nextLine();
-                    boolean b = validateAccNum(accNum);
-                    if(b && accNum.length() == 15)
-                    {
-                        break;
-                    }
-                    else if(!b)
-                    {
-                        System.out.println("The Account number should not have Alphabets.");
-                    }
-                    if(accNum.length() == 15)
-                    {
-                        break;
-                    }
-                    else
-                        System.out.println("Please enter a 15 digit Account Number:");
-                }
-                Bank user = getAccount(accNum);
-                if (user != null) 
-                {
-                    performActions(user);
-                } else 
-                {
-                    System.out.println("Invalid account number!");
-                }
-            } 
-            else if (choice == 3) 
-            {
-                System.out.println("Thank you!!");
-                System.exit(0);
-            } 
-            else 
-            {
-                System.out.println("Invalid choice, please try again.");
             }
+            catch(InputMismatchException e)
+            {
+                System.out.println("Invalid Input , Enter the Correct Option.");
+                s.nextLine();
+            }    
+        }
+    }
+    public static void createAccount()
+    {
+        Bank newUser = new Bank();
+        System.out.print("Enter a 15 digit Account Number:");
+        String accountNum = validateAccountInput();
+        newUser.setAccountNum(accountNum);
+        System.out.print("Enter the initial balance:");
+        int balance = validateAmount();
+        newUser.setBalance(balance);
+        accounts.add(newUser);
+        System.out.println("Account Created Successfully!");
+    }
+    public static void loginToAccount()
+    {
+        System.out.print("Enter your Account Number:");
+        String accNum = validateAccountInput();
+        Bank user = getAccount(accNum);
+        if (user != null) 
+        {
+            performActions(user);
+        } else 
+        {
+            System.out.println("Invalid account number!");
         }
     }
     public static boolean validateAccNum(String acc)
@@ -162,72 +135,99 @@ public class FinalJavaTask {
         }
         return true;
     }
+    public static int validateAmount()
+    {
+        int amount;
+        while(true)
+        {
+            try{
+                amount = s.nextInt();
+                return amount;
+            }
+            catch(InputMismatchException e)
+            {
+                System.out.println("Invalid Input , Please enter a Amount correctly.");
+                s.nextLine();
+            }
+        }
+    }
+    public static String validateAccountInput()
+    {
+        String accNum;
+        while (true) 
+        {
+            accNum = s.nextLine();
+            boolean b = validateAccNum(accNum);
+            if(b && accNum.length() == 15)
+            {
+                return accNum;
+            }
+            else if(!b)
+            {
+                System.out.println("The Account number should not have Alphabets.");
+            }
+            if(accNum.length() == 15)
+            {
+                return accNum;
+            }
+            else
+                System.out.println("Please enter a 15 digit Account Number:");
+        }
+    }
     public static void performActions(Bank user) 
     {
         while (true) 
         {
-            System.out.println("\nChoose an action:");
-            System.out.println("1 - Deposit");
-            System.out.println("2 - Withdraw");
-            System.out.println("3 - Check Balance");
-            System.out.println("4 - Transfer Money");
-            System.out.println("5 - Logout");
-            System.out.print("Enter your choice: ");
-            int choice = s.nextInt();
-            switch (choice) 
+            try{
+                System.out.println("\nChoose an action:");
+                System.out.println("1 - Deposit");
+                System.out.println("2 - Withdraw");
+                System.out.println("3 - Check Balance");
+                System.out.println("4 - Transfer Money");
+                System.out.println("5 - Logout");
+                System.out.print("Enter your choice: ");
+                int choice = s.nextInt();
+                switch (choice) 
+                {
+                    case 1:
+                        System.out.print("Enter amount to deposit: ");
+                        int depositAmount = validateAmount();
+                        user.deposit(depositAmount);
+                        break;
+                    case 2:
+                        System.out.print("Enter amount to withdraw: ");
+                        int withdrawAmount = validateAmount();
+                        user.withdraw(withdrawAmount);
+                        break;
+                    case 3:
+                        System.out.println("Your current balance is: " + user.getBalance());
+                        break;
+                    case 4:
+                        System.out.print("Enter recipient's Account Number ");
+                        //s.nextLine();
+                        String recipientAcc = validateAccountInput();
+                        Bank recipient = getAccount(recipientAcc);
+                        if(recipient == null)
+                        {
+                            System.out.println("Recipient account not found!");
+                        } 
+                        else 
+                        {
+                            System.out.print("Enter amount to transfer:");
+                            int transferAmount = validateAmount();
+                            user.transferAmount(transferAmount, recipient);
+                        }
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("Invalid option! Try again.");
+                }        
+            }
+            catch(InputMismatchException e)
             {
-                case 1:
-                    System.out.print("Enter amount to deposit: ");
-                    int depositAmount = s.nextInt();
-                    user.deposit(depositAmount);
-                    break;
-                case 2:
-                    System.out.print("Enter amount to withdraw: ");
-                    int withdrawAmount = s.nextInt();
-                    user.withdraw(withdrawAmount);
-                    break;
-                case 3:
-                    System.out.println("Your current balance is: " + user.getBalance());
-                    break;
-                case 4:
-                    System.out.print("Enter recipient's Account Number ");
-                    //s.nextLine();
-                    String recipientAcc;
-                    while (true) 
-                    {
-                        recipientAcc = s.nextLine();
-                        boolean b = validateAccNum(recipientAcc);
-                        if(b && recipientAcc.length() == 15)
-                        {
-                            break;
-                        }
-                        else if(!b)
-                        {
-                            System.out.println("The Account number should not have Alphabets.");
-                        }
-                        if(recipientAcc.length() == 15)
-                        {
-                            break;
-                        }
-                        else
-                            System.out.println("Please enter a 15 digit Account Number:");
-                    }
-                    Bank recipient = getAccount(recipientAcc);
-                    if(recipient == null)
-                    {
-                        System.out.println("Recipient account not found!");
-                    } 
-                    else 
-                    {
-                        System.out.print("Enter amount to transfer:");
-                        int transferAmount = s.nextInt();
-                        user.transferAmount(transferAmount, recipient);
-                    }
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("Invalid option! Try again.");
+                System.out.println("Invalid Input , Please Enter the correct the choice.");
+                s.nextLine();
             }
         }
     }
