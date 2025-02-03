@@ -128,7 +128,7 @@ public class FinalJavaTask {
         char[] ch = acc.toCharArray();
         for(int i=0;i<ch.length;i++)
         {
-            if(ch[i] >= 'a' && ch[i] <= 'z' || ch[i] >= 'A' && ch[i] <= 'Z')
+            if((ch[i] >= 'a' && ch[i] <= 'z' )|| (ch[i] >= 'A' && ch[i] <= 'Z'))
             {
                 return false;
             }
@@ -166,7 +166,7 @@ public class FinalJavaTask {
             {
                 System.out.println("The Account number should not have Alphabets.");
             }
-            if(accNum.length() == 15)
+            if(accNum.length() == 15 && b)
             {
                 return accNum;
             }
